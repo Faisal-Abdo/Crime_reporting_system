@@ -1,3 +1,10 @@
+html,
+body {
+    margin: 0;
+    overflow-x: hidden;
+
+}
+
 .topBar {
     background-image: linear-gradient(to top left, rgb(8 10 20 / 1), rgb(25 51 154));
     height: 7.5rem;
@@ -49,4 +56,14 @@
     top: -10px;
     left: 0;
     border-radius: 2px;
+}
+
+.quote {
+    quotes: '\201D' '\201E';
+}
+
+.p_quote{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    font-size:xx-large; 
 }
