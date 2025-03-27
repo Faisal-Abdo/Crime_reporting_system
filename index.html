@@ -10,7 +10,7 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-    <link rel="stylesheet" href="map.css" />
+    <link rel="stylesheet" href="Style2.css" />
     <link rel="stylesheet" href="Style.css" />
     <link rel="stylesheet" href="Style1.css" />
 
@@ -60,54 +60,57 @@
     </div>
 
     <!-- From Uiverse.io by Smit-Prajapati -->
-    <div class="form-container" style="display: none">
-      <div class="form">
-        <span class="heading">Report a Crime</span>
-        <span class="close-btn" onclick="closeForm()">&times;</span>
+    <div id="overlay">
+      <div class="form-container">
+        <div class="form">
+          <span class="heading">Report a Crime</span>
+          <span class="close-btn" onclick="closeForm()">&times;</span>
+          <form id="report_form">
+          <input
+            placeholder="National ID"
+            id="national-id"
+            type="number"
+            class="input"
+            required
+          />
+          <input
+            placeholder="Report Details"
+            id="report-details"
+            type="text"
+            class="input"
+            required
+          />
 
-        <input
-          placeholder="National ID"
-          id="national-id"
-          type="number"
-          class="input"
-          required
-        />
-        <input
-          placeholder="Report Details"
-          id="report-details"
-          type="text"
-          class="input"
-          required
-        />
+          <select id="crime-type" class="input" required>
+            <option value="" disabled selected>Select Crime Type</option>
+            <option value="Assault">Assault</option>
+            <option value="Robbery">Robbery</option>
+            <option value="Homicide">Homicide</option>
+            <option value="Kidnapping">Kidnapping</option>
+          </select>
 
-        <select id="crime-type" class="input" required>
-          <option value="" disabled selected>Select Crime Type</option>
-          <option value="Assault">Assault</option>
-          <option value="Robbery">Robbery</option>
-          <option value="Homicide">Homicide</option>
-          <option value="Kidnapping">Kidnapping</option>
-        </select>
+          <input
+            id="longitude"
+            type="text"
+            class="input"
+            placeholder="Enter Longitude between 52.0 and 59.8 for Oman region"
+            required
+          />
+          <input
+            id="latitude"
+            type="text"
+            class="input"
+            placeholder="Enter Latitude between 16.6 and 26.4 for Oman region"
+            required
+          />
+        </form>
 
-        <input
-          placeholder="Longitude"
-          id="longitude"
-          type="text"
-          class="input"
-          required
-        />
-        <input
-          placeholder="Latitude"
-          id="latitude"
-          type="text"
-          class="input"
-          required
-        />
-
-        <div class="button-container">
-          <div class="send-button" onclick="submitForm()">Submit</div>
-          <div class="reset-button-container">
-            <div id="reset-btn" class="reset-button" onclick="resetForm()">
-              Reset
+          <div class="button-container">
+            <div class="send-button" onclick="submitForm()">Submit</div>
+            <div class="reset-button-container">
+              <div id="reset-btn" class="reset-button" onclick="resetForm()">
+                Reset
+              </div>
             </div>
           </div>
         </div>
@@ -202,7 +205,17 @@
           alert("National ID must be numeric!");
           return false;
         }
+        // Longitude range for Oman: 52.0 to 59.8
+        if (longitude < 52.0 || longitude > 59.8) {
+          alert("Longitude must be between 52.0 and 59.8 (Oman region)!");
+          return false;
+        }
 
+        // Latitude range for Oman: 16.6 to 26.4
+        if (latitude < 16.6 || latitude > 26.4) {
+          alert("Latitude must be between 16.6 and 26.4 (Oman region)!");
+          return false;
+        }
         if (!decimalPattern.test(longitude) || !decimalPattern.test(latitude)) {
           alert("Longitude and Latitude must be valid numbers!");
           return false;
@@ -251,12 +264,10 @@
 
       // Your existing popup functions (unchanged)
       function popupform() {
-        document.getElementsByClassName("form-container")[0].style.display =
-          "flex";
+        document.getElementById("overlay").style.display = "flex";
       }
       function closeForm() {
-        document.getElementsByClassName("form-container")[0].style.display =
-          "none";
+        document.getElementById("overlay").style.display = "none";
       }
 
       // Initialize - load both JSON and localStorage markers
@@ -279,6 +290,11 @@
           loadMarkersFromStorage(); // Load any saved reports
         })
         .catch((error) => console.error(error));
+    </script>
+    <script>
+      function resetForm(){
+        document.getElementById("report_form").reset();
+      }
     </script>
   </body>
 </html>
