@@ -61,7 +61,26 @@
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
 
-      fetch("\data.json")
+      function addMarkerandPopup(
+            lat,
+            long,
+            report_details,
+            crime_type,
+            date_time, 
+            status
+          ) {
+            L.marker([lat, long]).addTo(map).bindPopup(`
+                    <b>Crime info:</b><br>
+                    <p>
+                      Crime Type: ${crime_type}<br>
+                      Report Details: ${report_details}<br>
+                      Report Date and Time: ${date_time}<br>
+                      Report Status: ${status}<br>
+                    </p>`)
+                    .openPopup();
+          }
+
+      fetch("/data.json")
         .then((response) => {
           if (!response.ok) {
             throw new Error(response.statusText);
@@ -76,30 +95,12 @@
               crime.latitude,
               crime.longitude,
               crime.report_details,
-              crime_type,
+              crime.crime_type,
               crime.report_date_time,
               crime.report_status
             );
           });
 
-          function addMarkerandPopup(
-            lat,
-            long,
-            report_details,
-            crime_type,
-            date_time,
-            status
-          ) {
-            L.marker([lat, long]).addTo("map").bindPopup(`
-                    <b>Crime info:</b><br>
-                    <p>
-                      Crime Type: ${crime_type}<br>
-                      Report Details: ${report_details}<br>
-                      Report Date and Time: ${date_time}<br>
-                      Report Status: ${status}<br>
-                    </p>`)
-                    .openPopup();
-          }
         })
         .catch((error) => console.error(error));
     </script>
