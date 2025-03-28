@@ -2,8 +2,8 @@
 
 **"Unmasking Crimes, One Click at a Time"**  
 
-![Crime Types Interface](Assets\Screenshot 2025-03-29 015923.png)  
-![Report Submission Form](\Assets\Screenshot 2025-03-29 020113.png)  
+![Crime Types Interface](Assets/Screenshot.png)  
+![Report Submission Form](/Assets/Screenshot%201.png)  
 
 ## Overview  
 A web-based crime reporting system that allows citizens to submit and visualize crime incidents across Oman with geographic validation.
