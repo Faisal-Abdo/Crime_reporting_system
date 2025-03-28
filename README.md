@@ -22,7 +22,7 @@ A web-based crime reporting system that allows citizens to submit and visualize 
 
 ### Installation  
 ```bash
-git clone https://github.com/yourusername/crime-reporting-system.git
+git clone https://github.com/Faisal-Abdo/Crime_reporting_system.git
 cd crime-reporting-system
 ```
 ### Running the Project
