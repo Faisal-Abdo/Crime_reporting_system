@@ -26,6 +26,6 @@ git clone https://github.com/Faisal-Abdo/Crime_reporting_system.git
 cd Crime_reporting_system
 ```
 ### Running the Project
-1.Open project in VS Code
-2.Right-click index.html → "Open with Live Server"
+1.Open project in VS Code <br>
+2.Right-click index.html → "Open with Live Server" <br>
 3.System will launch in default browser
