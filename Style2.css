@@ -37,3 +37,26 @@
     color: white;
     font-weight: bolder;
 }
+
+.footer {
+    background-image: linear-gradient(to bottom right, rgb(8 10 20 / 1), rgb(25 51 154));
+    color: white;
+    font-weight:bold;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-top: 3rem;
+}
+
+.social-icons a {
+    color: #94a3b8;
+    margin: 0 10px;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: white;
+}
