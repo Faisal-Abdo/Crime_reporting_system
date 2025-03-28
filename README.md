@@ -2,7 +2,7 @@
 
 **"Unmasking Crimes, One Click at a Time"**  
 
-![Crime Types Interface](./Screenshot_2025-03-29_015923.png)  
+![Crime Types Interface]("\Screenshots\Screenshot 2025-03-29 015923.png")  
 ![Report Submission Form](./Screenshot_2025-03-29_020113.png)  
 
 ## Overview  
