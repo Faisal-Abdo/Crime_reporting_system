@@ -10,9 +10,9 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-    <link rel="stylesheet" href="Style2.css" />
     <link rel="stylesheet" href="Style.css" />
     <link rel="stylesheet" href="Style1.css" />
+    <link rel="stylesheet" href="Style2.css" />
 
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -50,7 +50,21 @@
       <q class="quote">Unmasking Crimes, One Click at a Time</q>
     </p>
 
-    <div id="map"></div>
+    <div id="map">
+      <div class="filter-panel">
+        <h3 style="color: white; font-size: larger">Filter Crimes Types</h3>
+        <div id="crime-type-filters">
+          <input type="checkbox" name="vehicle1" class="filter" value="Assault" />
+          <label for="vehicle1">Assault</label><br />
+          <input type="checkbox" name="vehicle2" class="filter" value="Robbery" />
+          <label for="vehicle2">Robbery</label><br />
+          <input type="checkbox" name="vehicle3" class="filter" value="Kidnapping" />
+          <label for="vehicle3">Kidnapping</label><br />
+          <input type="checkbox" name="vehicle3" class="filter" value="Homicide" />
+          <label for="vehicle3">Homicide</label><br />
+        </div>
+      </div>
+    </div>
 
     <!-- From Uiverse.io by faizanullah1999 -->
     <div class="button-borders">
@@ -60,50 +74,50 @@
     </div>
 
     <!-- From Uiverse.io by Smit-Prajapati -->
-    <div id="overlay">
+    <div id="overlay" class="hidden">
       <div class="form-container">
         <div class="form">
           <span class="heading">Report a Crime</span>
           <span class="close-btn" onclick="closeForm()">&times;</span>
           <form id="report_form">
-          <input
-            placeholder="National ID"
-            id="national-id"
-            type="number"
-            class="input"
-            required
-          />
-          <input
-            placeholder="Report Details"
-            id="report-details"
-            type="text"
-            class="input"
-            required
-          />
+            <input
+              placeholder="National ID"
+              id="national-id"
+              type="number"
+              class="input"
+              required
+            />
+            <input
+              placeholder="Report Details"
+              id="report-details"
+              type="text"
+              class="input"
+              required
+            />
 
-          <select id="crime-type" class="input" required>
-            <option value="" disabled selected>Select Crime Type</option>
-            <option value="Assault">Assault</option>
-            <option value="Robbery">Robbery</option>
-            <option value="Homicide">Homicide</option>
-            <option value="Kidnapping">Kidnapping</option>
-          </select>
+            <select id="crime-type" class="input" required>
+              <option value="" disabled selected>Select Crime Type</option>
+              <option value="Assault">Assault</option>
+              <option value="Robbery">Robbery</option>
+              <option value="Homicide">Homicide</option>
+              <option value="Kidnapping">Kidnapping</option>
+            </select>
 
-          <input
-            id="longitude"
-            type="text"
-            class="input"
-            placeholder="Enter Longitude between 52.0 and 59.8 for Oman region"
-            required
-          />
-          <input
-            id="latitude"
-            type="text"
-            class="input"
-            placeholder="Enter Latitude between 16.6 and 26.4 for Oman region"
-            required
-          />
-        </form>
+            <input
+              id="longitude"
+              type="text"
+              class="input"
+              placeholder="Enter Longitude between 52.0 and 59.8 for Oman region"
+              required
+            />
+            <input
+              id="latitude"
+              type="text"
+              class="input"
+              placeholder="Enter Latitude between 16.6 and 26.4 for Oman region"
+              required
+            />
+          </form>
 
           <div class="button-container">
             <div class="send-button" onclick="submitForm()">Submit</div>
@@ -292,7 +306,7 @@
         .catch((error) => console.error(error));
     </script>
     <script>
-      function resetForm(){
+      function resetForm() {
         document.getElementById("report_form").reset();
       }
     </script>
