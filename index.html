@@ -51,16 +51,36 @@
     </p>
 
     <div id="map">
-      <div class="filter-panel">
-        <h3 style="color: white; font-size: larger">Filter Crimes Types</h3>
+      <div class="filter-panel" id="crime-type-filters">
+        <h3 style="color: white; font-size: larger">Filter by Crimes Types</h3>
         <div id="crime-type-filters">
-          <input type="checkbox" name="vehicle1" class="filter" value="Assault" />
+          <input
+            type="checkbox"
+            name="vehicle1"
+            class="filter"
+            value="Assault"
+          />
           <label for="vehicle1">Assault</label><br />
-          <input type="checkbox" name="vehicle2" class="filter" value="Robbery" />
+          <input
+            type="checkbox"
+            name="vehicle2"
+            class="filter"
+            value="Robbery"
+          />
           <label for="vehicle2">Robbery</label><br />
-          <input type="checkbox" name="vehicle3" class="filter" value="Kidnapping" />
+          <input
+            type="checkbox"
+            name="vehicle3"
+            class="filter"
+            value="Kidnapping"
+          />
           <label for="vehicle3">Kidnapping</label><br />
-          <input type="checkbox" name="vehicle3" class="filter" value="Homicide" />
+          <input
+            type="checkbox"
+            name="vehicle3"
+            class="filter"
+            value="Homicide"
+          />
           <label for="vehicle3">Homicide</label><br />
         </div>
       </div>
@@ -131,10 +151,20 @@
       </div>
     </div>
 
+    <footer class="footer">
+      <p>© 2024 Faisal Al Busaidi Product Line. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </footer>
+
     <script>
-      // Initialize map (unchanged)
       var map = L.map("map");
-      map.setView([51.505, -0.09], 13);
+      map.setView([21.0, 57.0], 6);
 
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -142,15 +172,13 @@
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
 
-      // Function to get current timestamp in "HH:MM at DD-MM-YYYY" format
       function getCurrentTimestamp() {
         const now = new Date();
         const time = now.toTimeString().substring(0, 5);
         const date = now.toLocaleDateString("en-GB").replace(/\//g, "-");
         return `${time} at ${date}`;
       }
-
-      // Your existing marker function (unchanged)
+      // const crimeFilter = new CrimeFilter(map);
       function addMarkerandPopup(
         lat,
         long,
@@ -159,7 +187,7 @@
         date_time,
         status
       ) {
-        L.marker([lat, long])
+        return L.marker([lat, long])
           .addTo(map)
           .bindPopup(
             `
@@ -171,11 +199,9 @@
               Report Status: ${status}<br>
             </p>
           `
-          )
-          .openPopup();
+          );
       }
 
-      // Load markers from localStorage on page load
       function loadMarkersFromStorage() {
         const storedCrimes = localStorage.getItem("crimeReports");
         if (storedCrimes) {
@@ -193,7 +219,6 @@
         }
       }
 
-      // Your existing field validation (unchanged)
       function validateForm() {
         let nationalId = document.getElementById("national-id").value.trim();
         let reportDetails = document
@@ -219,13 +244,11 @@
           alert("National ID must be numeric!");
           return false;
         }
-        // Longitude range for Oman: 52.0 to 59.8
         if (longitude < 52.0 || longitude > 59.8) {
           alert("Longitude must be between 52.0 and 59.8 (Oman region)!");
           return false;
         }
 
-        // Latitude range for Oman: 16.6 to 26.4
         if (latitude < 16.6 || latitude > 26.4) {
           alert("Latitude must be between 16.6 and 26.4 (Oman region)!");
           return false;
@@ -237,12 +260,10 @@
         return true;
       }
 
-      // Modified form submission handler
       function submitForm() {
         if (!validateForm()) {
           return false;
         }
-        // Create new crime report object
         const newCrime = {
           latitude: parseFloat(document.getElementById("latitude").value),
           longitude: parseFloat(document.getElementById("longitude").value),
@@ -254,13 +275,11 @@
           report_status: "Pending",
         };
 
-        // Save to localStorage
         const storedCrimes = localStorage.getItem("crimeReports");
         const crimes = storedCrimes ? JSON.parse(storedCrimes) : [];
         crimes.push(newCrime);
         localStorage.setItem("crimeReports", JSON.stringify(crimes));
 
-        // Add marker to map
         addMarkerandPopup(
           newCrime.latitude,
           newCrime.longitude,
@@ -269,14 +288,15 @@
           newCrime.report_date_time,
           newCrime.report_status
         );
-
-        // Close form and reset
+        map.flyTo([newCrime.latitude, newCrime.longitude], 16, {
+          duration: 0.5,
+          easeLinearity: 0.25,
+        });
         closeForm();
         document.getElementById("report-form").reset();
-        return false; // Prevent actual form submission
+        return false;
       }
 
-      // Your existing popup functions (unchanged)
       function popupform() {
         document.getElementById("overlay").style.display = "flex";
       }
@@ -284,7 +304,6 @@
         document.getElementById("overlay").style.display = "none";
       }
 
-      // Initialize - load both JSON and localStorage markers
       fetch("/data.json")
         .then((response) => {
           if (!response.ok) throw new Error(response.statusText);
@@ -301,7 +320,7 @@
               crime.report_status
             );
           });
-          loadMarkersFromStorage(); // Load any saved reports
+          loadMarkersFromStorage();
         })
         .catch((error) => console.error(error));
     </script>
@@ -310,5 +329,6 @@
         document.getElementById("report_form").reset();
       }
     </script>
+    <script src="filter.js"></script>
   </body>
 </html>
